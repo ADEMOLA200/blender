@@ -38,6 +38,7 @@ class AssetRepresentation;
 namespace ui {
 struct Layout;
 struct Block;
+enum class PopupAttachDirection : int8_t;
 }  // namespace ui
 
 struct ARegion;
@@ -280,10 +281,6 @@ struct ARegionType {
   /** Split region, copy data optionally. */
   void *(*duplicate)(void *poin);
 
-  /** Register operator types on startup. */
-  void (*operatortypes)();
-  /** Add items to keymap. */
-  void (*keymap)(wmKeyConfig *keyconf);
   /** Allows default cursor per region. */
   void (*cursor)(wmWindow *win, ScrArea *area, ARegion *region);
 
@@ -414,7 +411,7 @@ struct PanelType {
   /** Sub panels. */
   PanelType *parent;
   ListBaseT<LinkData> children;
-
+  ui::PopupAttachDirection popup_draw_direction;
   /** RNA integration. */
   ExtensionRNA rna_ext;
 };
